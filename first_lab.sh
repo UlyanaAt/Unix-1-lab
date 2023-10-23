@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#! /usr/bin/bash -e
 
 function delTempDir {
 #moving a source and output files to a upper directory
@@ -9,13 +9,13 @@ mv $fileName ../
 cd ../
 
 #deleting temporary directory
-rmdir $directoryName
+rm -d $directoryName
 
 echo "Temporary directory was deleted"
 }
 
 #Trapping signals
-trap delTempDir SIGQUIT SIGTERM SIGINT
+trap delTempDir exit 1 SIGQUIT SIGTERM SIGINT
 
 if [ "$#" -lt 1 ]; then
     echo "You didn't enter file name. Example: helloW.cpp"
