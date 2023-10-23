@@ -12,7 +12,6 @@ cd ../
 rmdir $directoryName
 
 echo "Temporary directory was deleted"
-exit 1
 }
 
 #Trapping signals
