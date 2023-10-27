@@ -4,19 +4,22 @@ function delTempDir {
 #moving to a upper directory
 cd ../ 
 
-#deleting temporary directory
+#saving the current return code
+local r=$?
+#return the default signal handler
+trap - EXIT
+    
 if [ -d "$directoryName" ]; then
-    echo "Do you want to delete temporary directory? (Y/N)"
-    read answer
-    if [ "$answer" = "Y" ]; then
-        rm -d $directoryName
-        echo "Temporary directory was deleted"
-    fi
+#deleting temporary directory
+    rm -f -d $directoryName
+    echo "Temporary directory was deleted"
 fi
+
+exit $rc
 }
 
 #Trapping signals
-trap "delTempDir; exit 1" SIGQUIT SIGTERM SIGINT
+trap delTempDir EXIT SIGQUIT SIGTERM SIGINT
 
 if [ "$#" -lt 1 ]; then
     echo "You didn't enter file name. Example: helloW.cpp"
@@ -51,8 +54,4 @@ g++ -Wall -o $fileName $1
 #output file execution
 ./$fileName
 
-#moving a source and output files to a upper directory
-mv $sourceFile ../
-mv $fileName ../
-
-delTempDir
+#moving a source and output files to a upper d
