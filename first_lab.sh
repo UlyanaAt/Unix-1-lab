@@ -5,7 +5,7 @@ function delTempDir {
 cd ../ 
 
 #saving the current return code
-local r=$?
+local rc=$?
 #return the default signal handler
 trap - EXIT
     
