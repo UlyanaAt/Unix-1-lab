@@ -54,4 +54,6 @@ g++ -Wall -o $fileName $1
 #output file execution
 ./$fileName
 
-#moving a source and output files to a upper d
+#moving a source and output files to a upper directory
+mv $sourceFile ../
+mv $fileName ../
